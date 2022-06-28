@@ -19,14 +19,14 @@ router.post('/sap-filter', async (req, res) => {
 
     try {
         let resp = await axios.post('http://172.101.1.19/API_QcReport/ZBAPI_getZPPIN013_OUT', input);
-       
-        if(resp.status == 200){
-
+        if (resp.status == 200) {
             output = JSON.parse(resp.data);
         }
-        // console.log(resp.data)
     } catch (err) {
-        throw getError(err);
+        let resp = await axios.post('http://172.101.1.19/API_QcReport/ZBAPI_getZPPIN013_OUT', input);
+        if (resp.status == 200) {
+            output = resp.data;
+        }
     }
 
 
